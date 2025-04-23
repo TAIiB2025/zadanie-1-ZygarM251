@@ -1,0 +1,31 @@
+<div class="produkt-container">
+    <button (click)="toggleSzczegoly()">
+      {{ pokazSzczegoly ? 'Zwiń' : 'Rozwiń' }}
+    </button>
+  
+    <div *ngIf="pokazSzczegoly; else tylkoNazwa">
+      <table [ngClass]="{'promo': produkt.czyPromocja}">
+        <tr>
+          <th>Nazwa</th>
+          <th>Cena</th>
+          <th>Data utworzenia</th>
+          <th>Dodaj do koszyka</th>
+          <th>Liczba sztuk w koszyku</th>
+        </tr>
+        <tr>
+          <td>{{ produkt.nazwa }}</td>
+          <td>{{ produkt.cena | currency:'PLN':'symbol-narrow' }}</td>
+          <td>{{ produkt.dataUtworzenia | date:'dd.MM.yyyy' }}</td>
+          <td>
+            <button (click)="dodajDoKoszyka()">Dodaj do koszyka</button>
+          </td>
+          <td>{{ produkt.iloscWSkoszyku }}</td>
+        </tr>
+      </table>
+    </div>
+  
+    <ng-template #tylkoNazwa>
+      <p><strong>{{ produkt.nazwa }}</strong></p>
+    </ng-template>
+  </div>
+  
